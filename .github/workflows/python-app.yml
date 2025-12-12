@@ -26,6 +26,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        
+        # Install a compatible version of NumPy BEFORE pandas 
+        pip install "numpy==1.26.4" 
+        # Install pandas after numpy (avoids ABI mismatch) 
+        pip install "pandas==2.1.4" 
+        
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
